@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Estrutura de Liderança - WFS</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    :root {
+      --wfs-red: #c8202f;
+      --wfs-red-dark: #a91825;
+      --wfs-red-light: #fff4f5;
+
+      --text-main: #18212b;
+      --text-secondary: #66717d;
+      --text-muted: #929ba5;
+
+      --bg: #f4f6f8;
+      --white: #ffffff;
+
+      --border: #e5e9ed;
+      --border-light: #edf0f3;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+    }
+
+
+    /* =========================================================
+       BODY
+    ========================================================= */
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding-bottom: 40px;
+      min-height: 100vh;
+    }
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .header-container {
+      background: #ffffff;
+      padding: 18px 22px 0 22px;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      max-width: 1300px;
+      margin: 0 auto;
+
+      min-height: 54px;
+    }
+
+
+    /* =========================================================
+       LOGO / BRAND
+    ========================================================= */
+
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .badge-wfs {
+      position: relative;
+
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #ffffff;
+
+      color: var(--wfs-red);
+
+      font-weight: 800;
+      font-size: 17px;
+
+      border-radius: 50%;
+
+      border: 2px solid var(--wfs-red);
+
+      letter-spacing: 0;
+
+      box-shadow: none;
+    }
+
+    .badge-wfs::before {
+      content: "";
+      position: absolute;
+
+      width: 33px;
+      height: 33px;
+
+      border: 2px solid var(--wfs-red);
+
+      border-radius: 50%;
+
+      opacity: .28;
+    }
+
+    .brand-title {
+      color: #18212b;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      line-height: 1.15;
+    }
+
+    .brand-title span {
+      display: block;
+
+      color: #737d88;
+
+      font-size: 10px;
+      font-weight: 600;
+
+      margin-top: 4px;
+
+      letter-spacing: .2px;
+    }
+
+
+    /* =========================================================
+       HEADER ACTIONS
+    ========================================================= */
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .status-pill {
+      background: #f5f7f8;
+
+      color: #5f6974;
+
+      padding: 8px 13px;
+
+      border-radius: 20px;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      border: 1px solid #e7eaed;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      background-color: #22a06b;
+
+      border-radius: 50%;
+
+      box-shadow: 0 0 0 3px rgba(34, 160, 107, .10);
+    }
+
+    .btn-refresh {
+      background: #ffffff;
+
+      border: 1px solid #e2e6ea;
+
+      color: #5f6974;
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: all .2s ease;
+
+      font-size: 18px;
+    }
+
+    .btn-refresh:hover {
+      background: var(--wfs-red-light);
+      color: var(--wfs-red);
+      border-color: #efc4c8;
+      transform: rotate(180deg);
+    }
+
+
+    /* =========================================================
+       BANNER
+    ========================================================= */
+
+    .search-box {
+      max-width: 1300px;
+
+      margin: 15px auto 0 auto;
+
+      position: relative;
+
+      height: 104px;
+
+      border-radius: 15px 15px 0 0;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(25, 33, 43, .35),
+          rgba(25, 33, 43, .08)
+        ),
+        url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80")
+        center 58% / cover no-repeat;
+    }
+
+
+    /* =========================================================
+       SEARCH
+    ========================================================= */
+
+    .search-box::after {
+      content: "";
+      position: absolute;
+
+      left: 18px;
+      right: 18px;
+      bottom: -23px;
+
+      height: 48px;
+
+      background: #ffffff;
+
+      border-radius: 13px;
+
+      box-shadow: 0 4px 16px rgba(15, 23, 42, .08);
+
+      pointer-events: none;
+    }
+
+    .search-input {
+      position: absolute;
+
+      z-index: 5;
+
+      left: 18px;
+      right: 18px;
+      bottom: -9px;
+
+      width: calc(100% - 36px);
+
+      height: 46px;
+
+      background: #ffffff;
+
+      border: 1px solid #e3e7eb;
+
+      border-radius: 13px;
+
+      padding: 0 18px 0 45px;
+
+      color: #1e293b;
+
+      font-size: 13px;
+
+      outline: none;
+
+      box-shadow: 0 5px 18px rgba(15, 23, 42, .09);
+
+      transition: all .2s ease;
+    }
+
+    .search-box::before {
+      content: "⌕";
+
+      position: absolute;
+
+      z-index: 10;
+
+      left: 34px;
+      bottom: 2px;
+
+      transform: translateY(-50%);
+
+      font-size: 24px;
+
+      line-height: 1;
+
+      color: #707a85;
+
+      pointer-events: none;
+    }
+
+    .search-input::placeholder {
+      color: #9aa2aa;
+    }
+
+    .search-input:focus {
+      border-color: #d9a0a5;
+
+      box-shadow:
+        0 5px 18px rgba(15, 23, 42, .09),
+        0 0 0 3px rgba(200, 32, 47, .07);
+    }
+
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    .main-container {
+      max-width: 1300px;
+
+      margin: 34px auto 0 auto;
+
+      padding: 0 20px;
+    }
+
+
+    /* =========================================================
+       KPI GRID
+    ========================================================= */
+
+    .kpi-grid {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 18px;
+    }
+
+    .kpi-card {
+      position: relative;
+
+      background: #ffffff;
+
+      border-radius: 14px;
+
+      padding: 17px 17px 14px 17px;
+
+      min-height: 112px;
+
+      border: 1px solid #e5e9ed;
+
+      box-shadow: var(--shadow-sm);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      overflow: hidden;
+
+      transition: all .2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .kpi-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 3px;
+
+      background: #cbd1d7;
+    }
+
+    .kpi-card.red::before {
+      background: var(--wfs-red);
+    }
+
+    .kpi-card.blue::before {
+      background: #3d9db7;
+    }
+
+    .kpi-card.green::before {
+      background: #687b8a;
+    }
+
+    .kpi-card.orange::before {
+      background: #b46b58;
+    }
+
+    .kpi-value {
+      font-size: 27px;
+
+      font-weight: 800;
+
+      color: #17212b;
+
+      line-height: 1;
+
+      margin-bottom: 7px;
+
+      letter-spacing: -.8px;
+    }
+
+    .kpi-title {
+      font-size: 10px;
+
+      font-weight: 700;
+
+      color: #707a84;
+
+      text-transform: uppercase;
+
+      letter-spacing: .45px;
+    }
+
+    .kpi-subtitle {
+      font-size: 10px;
+
+      font-weight: 600;
+
+      color: var(--wfs-red);
+
+      margin-top: 9px;
+    }
+
+    .kpi-subtitle.muted {
+      color: #98a0a8;
+    }
+
+
+    /* =========================================================
+       TOOLBAR
+    ========================================================= */
+
+    .filter-toolbar {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 12px;
+
+      background: #ffffff;
+
+      padding: 13px 16px;
+
+      border-radius: 13px;
+
+      box-shadow: var(--shadow-sm);
+
+      border: 1px solid #e5e9ed;
+    }
+
+    .section-title {
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #252f39;
+
+      letter-spacing: -.1px;
+
+      text-transform: none;
+    }
+
+    .section-title::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 3px;
+      height: 16px;
+
+      margin-right: 8px;
+
+      vertical-align: -3px;
+
+      background: var(--wfs-red);
+
+      border-radius: 4px;
+    }
+
+    .filter-controls {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .select-equipes {
+      padding: 8px 12px;
+
+      border-radius: 9px;
+
+      border: 1px solid #dce1e5;
+
+      background-color: #fafbfc;
+
+      color: #3c4650;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      outline: none;
+
+      cursor: pointer;
+    }
+
+    .select-equipes:focus {
+      border-color: #d49da2;
+    }
+
+    .badge-total-lideres {
+      font-size: 10px;
+
+      font-weight: 700;
+
+      color: #8b949d;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       TEAMS
+    ========================================================= */
+
+    .teams-container {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 9px;
+    }
+
+    .lider-card {
+      background: #ffffff;
+
+      border-radius: 13px;
+
+      border: 1px solid #e3e7eb;
+
+      box-shadow: 0 2px 7px rgba(15, 23, 42, .035);
+
+      overflow: hidden;
+
+      transition: all .2s ease;
+    }
+
+    .lider-card:hover {
+      border-color: #d7dde2;
+
+      box-shadow: 0 7px 18px rgba(15, 23, 42, .07);
+    }
+
+    .lider-card-header {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 13px 15px;
+
+      cursor: pointer;
+
+      user-select: none;
+    }
+
+    .lider-main-info {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      min-width: 0;
+    }
+
+
+    /* =========================================================
+       AVATAR
+    ========================================================= */
+
+    .avatar-initials {
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+
+      background: #f4f6f7;
+
+      color: #68737e;
+
+      font-weight: 800;
+
+      font-size: 12px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border: 1px solid #e1e5e8;
+
+      flex-shrink: 0;
+    }
+
+    .lider-card:first-child .avatar-initials {
+      background: #fff4f5;
+
+      color: var(--wfs-red);
+
+      border-color: #f1c9cd;
+    }
+
+    .lider-detalhes {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 4px;
+
+      min-width: 0;
+    }
+
+    .lider-nome {
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #1d2731;
+
+      text-transform: uppercase;
+
+      line-height: 1.2;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    .lider-subtext {
+      font-size: 10px;
+
+      font-weight: 600;
+
+      color: #87909a;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+
+    /* =========================================================
+       TEAM STATS
+    ========================================================= */
+
+    .lider-stats {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+    .count-box {
+      text-align: right;
+    }
+
+    .count-num {
+      font-size: 17px;
+
+      font-weight: 800;
+
+      color: #27323c;
+
+      line-height: 1;
+    }
+
+    .count-label {
+      font-size: 8px;
+
+      font-weight: 800;
+
+      color: #a0a7ae;
+
+      text-transform: uppercase;
+
+      letter-spacing: .4px;
+
+      margin-top: 4px;
+    }
+
+    .chevron-icon {
+      width: 25px;
+      height: 25px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #a2aab2;
+
+      font-size: 15px;
+
+      transition: transform .2s ease;
+    }
+
+    .lider-card.expanded .chevron-icon {
+      transform: rotate(90deg);
+
+      color: var(--wfs-red);
+    }
+
+
+    /* =========================================================
+       TEAM EXPANSION
+    ========================================================= */
+
+    .equipe-panel {
+      display: none;
+
+      padding: 0 15px 15px 15px;
+
+      border-top: 1px solid #eef1f3;
+
+      background-color: #fafbfc;
+    }
+
+    .lider-card.expanded .equipe-panel {
+      display: block;
+    }
+
+    .equipe-header-title {
+      font-size: 9px;
+
+      font-weight: 800;
+
+      color: #929aa2;
+
+      text-transform: uppercase;
+
+      letter-spacing: .6px;
+
+      padding: 13px 0 9px 0;
+    }
+
+
+    /* =========================================================
+       COLLABORATORS
+    ========================================================= */
+
+    .colab-grid {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+
+      gap: 8px;
+    }
+
+    .colab-item-card {
+      background: #ffffff;
+
+      padding: 11px 12px;
+
+      border-radius: 10px;
+
+      border: 1px solid #e4e8eb;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      gap: 7px;
+
+      box-shadow: 0 1px 3px rgba(0,0,0,.02);
+    }
+
+    .colab-item-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-start;
+
+      gap: 8px;
+    }
+
+    .colab-item-nome {
+      font-size: 11px;
+
+      font-weight: 800;
+
+      color: #26313b;
+
+      text-transform: uppercase;
+
+      line-height: 1.25;
+    }
+
+    .colab-chapa-badge {
+      background: #f4f6f8;
+
+      color: #68727d;
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      padding: 3px 6px;
+
+      border-radius: 5px;
+
+      white-space: nowrap;
+
+      border: 1px solid #e2e6ea;
+    }
+
+    .colab-meta-details {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 6px;
+
+      border-top: 1px dashed #e8ebee;
+
+      padding-top: 6px;
+
+      margin-top: 2px;
+    }
+
+    .colab-turno-tag {
+      font-size: 8px;
+
+      font-weight: 800;
+
+      color: #626c76;
+
+      background: #f3f5f7;
+
+      border: 1px solid #dfe4e8;
+
+      padding: 3px 6px;
+
+      border-radius: 4px;
+
+      text-transform: uppercase;
+    }
+
+    .colab-horario-tag {
+      font-size: 9px;
+
+      font-weight: 800;
+
+      color: #586b77;
+
+      background: #f1f5f7;
+
+      border: 1px solid #dce3e7;
+
+      padding: 3px 7px;
+
+      border-radius: 5px;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .loading-state {
+      text-align: center;
+
+      padding: 45px 20px;
+
+      color: #7d8791;
+
+      font-weight: 600;
+
+      font-size: 12px;
+
+      background: #ffffff;
+
+      border-radius: 13px;
+
+      border: 1px solid #e3e7eb;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+
+    /* =========================================================
+       RESPONSIVIDADE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .header-container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .main-container {
+        padding: 0 14px;
+      }
+
+      .search-box {
+        height: 92px;
+      }
+    }
+
+
+    @media (max-width: 600px) {
+
+      body {
+        padding-bottom: 25px;
+      }
+
+      .header-container {
+        padding: 13px 12px 0 12px;
+      }
+
+      .header-top {
+        min-height: 48px;
+      }
+
+      .badge-wfs {
+        width: 42px;
+        height: 42px;
+
+        font-size: 14px;
+      }
+
+      .badge-wfs::before {
+        width: 28px;
+        height: 28px;
+      }
+
+      .brand-title {
+        font-size: 13px;
+      }
+
+      .brand-title span {
+        font-size: 8px;
+      }
+
+      .status-pill {
+        display: none;
+      }
+
+      .btn-refresh {
+        width: 34px;
+        height: 34px;
+      }
+
+      .search-box {
+        height: 86px;
+
+        margin-top: 12px;
+
+        border-radius: 12px 12px 0 0;
+      }
+
+      .search-input {
+        left: 10px;
+        right: 10px;
+
+        width: calc(100% - 20px);
+
+        bottom: -8px;
+
+        height: 43px;
+
+        padding-left: 40px;
+
+        font-size: 11px;
+      }
+
+      .search-box::before {
+        left: 25px;
+        bottom: 0;
+      }
+
+      .main-container {
+        margin-top: 28px;
+
+        padding: 0 10px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+
+        margin-bottom: 12px;
+      }
+
+      .kpi-card {
+        min-height: 101px;
+
+        padding: 14px 13px 11px 13px;
+
+        border-radius: 11px;
+      }
+
+      .kpi-value {
+        font-size: 23px;
+      }
+
+      .kpi-title {
+        font-size: 8px;
+      }
+
+      .kpi-subtitle {
+        font-size: 8px;
+      }
+
+      .filter-toolbar {
+        padding: 10px 11px;
+
+        border-radius: 11px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 9px;
+      }
+
+      .filter-controls {
+        justify-content: space-between;
+      }
+
+      .select-equipes {
+        flex: 1;
+      }
+
+      .lider-card-header {
+        padding: 12px;
+      }
+
+      .lider-main-info {
+        gap: 9px;
+      }
+
+      .avatar-initials {
+        width: 37px;
+        height: 37px;
+
+        font-size: 10px;
+      }
+
+      .lider-nome {
+        font-size: 11px;
+      }
+
+      .lider-subtext {
+        font-size: 8px;
+      }
+
+      .count-num {
+        font-size: 15px;
+      }
+
+      .count-label {
+        font-size: 7px;
+      }
+
+      .chevron-icon {
+        width: 20px;
+      }
+
+      .equipe-panel {
+        padding-left: 11px;
+        padding-right: 11px;
+        padding-bottom: 11px;
+      }
+
+      .colab-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .colab-item-card {
+        padding: 10px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+
+  <header class="header-container">
+
+    <div class="header-top">
+
+      <div class="logo-brand">
+
+        <div class="badge-wfs">WFS</div>
+
+        <div class="brand-title">
+          Estrutura de Liderança
+
+          <span>Painel Operacional</span>
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          Operação Ativa
+        </div>
+
+        <button
+          class="btn-refresh"
+          onclick="carregarDados()"
+          title="Atualizar dados"
+        >
+          ↻
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         BANNER + PESQUISA
+    ======================================================== -->
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Pesquisar por nome de líder, colaborador, matrícula, turno ou horário..."
+        onkeyup="filtrarResultado()"
+      >
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="main-container">
+
+
+    <!-- =======================================================
+         KPIs
+    ======================================================== -->
+
+    <section class="kpi-grid">
+
+
+      <div class="kpi-card red">
+
+        <div>
+
+          <div
+            id="kpiLideres"
+            class="kpi-value"
+          >
+            0
+          </div>
+
+          <div class="kpi-title">
+            Líderes Ativos
+          </div>
+
+        </div>
+
+        <div class="kpi-subtitle">
+          ↑ Operacionais
+        </div>
+
+      </div>
+
+
+
+      <div class="kpi-card blue">
+
+        <div>
+
+          <div
+            id="kpiColabs"
+            class="kpi-value"
+          >
+            0
+          </div>
+
+          <div class="kpi-title">
+            Total na Operação
+          </div>
+
+        </div>
+
+        <div class="kpi-subtitle muted">
+          Atribuição Automática
+        </div>
+
+      </div>
+
+
+
+      <div class="kpi-card green">
+
+        <div>
+
+          <div
+            id="kpiMedia"
+            class="kpi-value"
+          >
+            0
+          </div>
+
+          <div class="kpi-title">
+            Média por Equipe
+          </div>
+
+        </div>
+
+        <div
+          id="kpiMaiorEquipe"
+          class="kpi-subtitle muted"
+        >
+          Maior: N/A
+        </div>
+
+      </div>
+
+
+
+      <div class="kpi-card orange">
+
+        <div>
+
+          <div
+            id="kpiTerminaisTurnos"
+            class="kpi-value"
+          >
+            T2 / T3
+          </div>
+
+          <div class="kpi-title">
+            Terminais / Turnos
+          </div>
+
+        </div>
+
+        <div class="kpi-subtitle muted">
+          Sem Treinadores / Sem Duplicados
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         FILTROS
+    ======================================================== -->
+
+    <div class="filter-toolbar">
+
+      <span class="section-title">
+        Líderes e Equipes
+      </span>
+
+
+      <div class="filter-controls">
+
+        <select
+          id="selectFiltroEquipes"
+          class="select-equipes"
+          onchange="aplicarFiltroTamanho()"
+        >
+
+          <option value="todas">
+            Todas as Equipes
+          </option>
+
+          <option value="maior">
+            Maior Equipe
+          </option>
+
+          <option value="menor">
+            Menor Equipe
+          </option>
+
+        </select>
+
+
+        <span
+          id="txtTotalLideres"
+          class="badge-total-lideres"
+        >
+          0 líderes
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =======================================================
+         EQUIPES
+    ======================================================== -->
+
+    <div
+      id="teamsContainer"
+      class="teams-container"
+    >
+
+      <div class="loading-state">
+        Carregando e dividindo equipes de forma equilibrada...
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       MANTIDO
+  ========================================================== -->
+
+  <script>
+
+    let dadosGlobais = {};
+
+
+    function carregarDados() {
+
+      document.getElementById("teamsContainer").innerHTML =
+        '<div class="loading-state">Atualizando dados e distribuindo equipes...</div>';
+
+      google.script.run
+        .withSuccessHandler(renderizarPainel)
+        .distribuirColaboradoresEquilibrado();
+
+    }
+
+
+
+    function obterIniciais(nome) {
+
+      if (!nome) return "LD";
+
+      const partes = nome.trim().split(" ");
+
+      if (partes.length === 1)
+        return partes[0].substring(0, 2).toUpperCase();
+
+      return (
+        partes[0][0] +
+        partes[partes.length - 1][0]
+      ).toUpperCase();
+
+    }
+
+
+
+    function renderizarPainel(distribuicao) {
+
+      dadosGlobais = distribuicao;
+
+      const container =
+        document.getElementById("teamsContainer");
+
+      container.innerHTML = "";
+
+      const nomesLideres =
+        Object.keys(distribuicao);
+
+
+      if (nomesLideres.length === 0) {
+
+        container.innerHTML =
+          '<div class="loading-state">Nenhum líder ou colaborador elegível localizado.</div>';
+
+        return;
+      }
+
+
+      let totalColaboradores = 0;
+
+      let maiorQtd = -1;
+
+      let maiorLiderNome = "";
+
+
+      nomesLideres.forEach(nomeLider => {
+
+        const item =
+          distribuicao[nomeLider];
+
+        const qtd =
+          item.equipe.length;
+
+
+        totalColaboradores += qtd;
+
+
+        if (qtd > maiorQtd) {
+
+          maiorQtd = qtd;
+
+          maiorLiderNome =
+            item.lider.nome;
+
+        }
+
+
+        const card =
+          document.createElement("div");
+
+
+        card.className =
+          "lider-card";
+
+
+        card.setAttribute(
+          "data-lider",
+          item.lider.nome.toLowerCase()
+        );
+
+
+        card.setAttribute(
+          "data-qtd",
+          qtd
+        );
+
+
+        let htmlColabs = "";
+
+
+        item.equipe.forEach(colab => {
+
+          const horarioTexto =
+            colab.horario;
+
+          const turnoTexto =
+            colab.turno;
+
+          const funcaoTexto =
+            colab.funcao;
+
+
+          htmlColabs += `
+
+            <div
+              class="colab-item-card"
+              data-colab="${colab.nome.toLowerCase()} ${colab.chapa} ${horarioTexto.toLowerCase()} ${turnoTexto.toLowerCase()} ${funcaoTexto.toLowerCase()}"
+            >
+
+              <div class="colab-item-header">
+
+                <span class="colab-item-nome">
+                  ${colab.nome}
+                </span>
+
+                <span class="colab-chapa-badge">
+                  Chapa ${colab.chapa}
+                </span>
+
+              </div>
+
+
+              <div class="colab-meta-details">
+
+                <span class="colab-turno-tag">
+                  ${turnoTexto}
+                </span>
+
+                <span class="colab-horario-tag">
+                  🕒 ${horarioTexto}
+                </span>
+
+              </div>
+
+            </div>
+
+          `;
+
+        });
+
+
+        const iniciais =
+          obterIniciais(item.lider.nome);
+
+
+        const subtexto =
+          `Chapa ${item.lider.chapa || 'N/A'} • ${item.lider.terminal || 'GERAL'} (${item.lider.turno || 'GERAL'})`;
+
+
+        card.innerHTML = `
+
+          <div
+            class="lider-card-header"
+            onclick="alternarExpansao(this)"
+          >
+
+            <div class="lider-main-info">
+
+              <div class="avatar-initials">
+                ${iniciais}
+              </div>
+
+
+              <div class="lider-detalhes">
+
+                <div class="lider-nome">
+                  ${item.lider.nome}
+                </div>
+
+                <div class="lider-subtext">
+                  ${subtexto}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="lider-stats">
+
+              <div class="count-box">
+
+                <div class="count-num">
+                  ${qtd}
+                </div>
+
+                <div class="count-label">
+                  COLABS
+                </div>
+
+              </div>
+
+
+              <div class="chevron-icon">
+                ❯
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="equipe-panel">
+
+            <div class="equipe-header-title">
+              Membros da Equipe (${qtd})
+            </div>
+
+            <div class="colab-grid">
+
+              ${htmlColabs}
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+      });
+
+
+
+      document.getElementById("kpiLideres").innerText =
+        nomesLideres.length;
+
+
+      document.getElementById("kpiColabs").innerText =
+        totalColaboradores;
+
+
+      document.getElementById("txtTotalLideres").innerText =
+        `${nomesLideres.length} líderes`;
+
+
+      const media =
+        nomesLideres.length > 0
+          ? (totalColaboradores / nomesLideres.length).toFixed(1)
+          : 0;
+
+
+      document.getElementById("kpiMedia").innerText =
+        media;
+
+
+      if (maiorLiderNome) {
+
+        document.getElementById("kpiMaiorEquipe").innerText =
+          `Maior: ${maiorLiderNome.split(' ')[0]} (${maiorQtd})`;
+
+      }
+
+
+      aplicarFiltroTamanho();
+
+    }
+
+
+
+    function alternarExpansao(elementoHeader) {
+
+      const card =
+        elementoHeader.parentElement;
+
+      card.classList.toggle("expanded");
+
+    }
+
+
+
+    function aplicarFiltroTamanho() {
+
+      const opcao =
+        document.getElementById("selectFiltroEquipes").value;
+
+
+      const cards =
+        Array.from(
+          document.querySelectorAll(".lider-card")
+        );
+
+
+      if (cards.length === 0)
+        return;
+
+
+      if (opcao === "todas") {
+
+        cards.forEach(card =>
+          card.style.display = "block"
+        );
+
+        return;
+      }
+
+
+      let quantidades =
+        cards.map(card =>
+          parseInt(
+            card.getAttribute("data-qtd") || "0"
+          )
+        );
+
+
+      let maxQtd =
+        Math.max(...quantidades);
+
+
+      let minQtd =
+        Math.min(...quantidades);
+
+
+      cards.forEach(card => {
+
+        let qtd =
+          parseInt(
+            card.getAttribute("data-qtd") || "0"
+          );
+
+
+        if (opcao === "maior") {
+
+          card.style.display =
+            (qtd === maxQtd)
+              ? "block"
+              : "none";
+
+        }
+
+        else if (opcao === "menor") {
+
+          card.style.display =
+            (qtd === minQtd)
+              ? "block"
+              : "none";
+
+        }
+
+      });
+
+    }
+
+
+
+    function filtrarResultado() {
+
+      const termo =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase()
+          .trim();
+
+
+      const cards =
+        document.querySelectorAll(".lider-card");
+
+
+      cards.forEach(card => {
+
+        const liderNome =
+          card.getAttribute("data-lider");
+
+
+        const colabs =
+          card.querySelectorAll(".colab-item-card");
+
+
+        let encontrouColab =
+          false;
+
+
+        colabs.forEach(colab => {
+
+          const textoColab =
+            colab.getAttribute("data-colab") || "";
+
+
+          if (textoColab.includes(termo)) {
+
+            encontrouColab = true;
+
+          }
+
+        });
+
+
+        if (
+          liderNome.includes(termo) ||
+          encontrouColab
+        ) {
+
+          card.style.display = "block";
+
+
+          if (
+            termo !== "" &&
+            encontrouColab
+          ) {
+
+            card.classList.add("expanded");
+
+          }
+
+        }
+
+        else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+
+      if (termo === "") {
+
+        aplicarFiltroTamanho();
+
+      }
+
+    }
+
+
+
+    window.onload =
+      carregarDados;
+
+  </script>
+
+
+</body>
+</html>
